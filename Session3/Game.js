@@ -10,7 +10,7 @@ var win = 0;
 
 export class Game extends Node {
     init() {
-        score = 1000;
+        score = 10000;
         countClick = 0;
         win = 0;
         clickedImg = [];
@@ -27,6 +27,7 @@ export class Game extends Node {
 
         let title = new Card('./img/title.jpg');
         title.width = window.innerWidth/6;
+        title.id = 'title';
         title.height = window.innerHeight/6;
         title.x = 2*title.width*0.95 + window.innerHeight*0.2;
 
@@ -58,12 +59,26 @@ export class Game extends Node {
         btnPlayAgain.id = 'btnAgain';
         btnPlayAgain.on('click',this.onClickAgain.bind(this));
 
+        let btnReturn = new Button();
+        btnReturn.text = 'Return';
+        btnReturn.fontSize = '40px';
+        btnReturn.width = window.innerWidth/5;
+        btnReturn.height = window.innerHeight/6;
+        btnReturn.x = window.innerWidth/2.52;
+        btnReturn.y = window.innerHeight/1.38;
+        btnReturn.backgroundColor = 'White';
+        btnReturn.color = 'Black';
+        btnReturn.elm.style.display = 'none';
+        btnReturn.id = 'btnReturn';
+        btnReturn.on('click',this.onClickAgain.bind(this));
+
         this.addChild(bg);
         this.addChild(vic);
         this.addChild(title);
         this.addChild(showScore);
         this.addChild(labelScore);
         this.addChild(btnPlayAgain);
+        this.addChild(btnReturn);
         this._initSize();
         this._initCards();
         this._initRandom();
@@ -152,8 +167,9 @@ export class Game extends Node {
                     }
                     document.getElementById('score').style.display = 'none';
                     document.getElementById('labelscore').style.display = 'none';
+                    document.getElementById('title').style.display = 'none';
                     document.getElementById('victory').style.display = 'block';
-                    document.getElementById('btnAgain').style.display = 'block';
+                    document.getElementById('btnReturn').style.display = 'block';
                 }
                 clickedImg = [];
                 countClick = 0;
